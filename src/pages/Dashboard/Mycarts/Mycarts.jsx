@@ -1,5 +1,6 @@
 import Swal from "sweetalert2";
 import useCarts from "../../../hooks/useCarts";
+import { Link } from "react-router-dom";
 
 const Mycarts = () => {
   const [cart, refetch] = useCarts();
@@ -37,7 +38,14 @@ const Mycarts = () => {
         <h1 className="font-semibold uppercase">
           Total Price: <span className="text-orange-500">${totalPrice}</span>
         </h1>
-        <button className="btn btn-sm btn-warning text-white">Pay</button>
+        <Link to="/dashboard/payment">
+          <button
+            disabled={totalPrice == 0}
+            className="btn btn-sm btn-warning text-white"
+          >
+            Pay
+          </button>
+        </Link>
       </div>
       <div className="overflow-x-auto w-full">
         <table className="table w-full">

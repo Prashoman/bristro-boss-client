@@ -8,6 +8,7 @@ const AddItem = () => {
   const { register, handleSubmit, reset } = useForm();
   const imageToken = import.meta.env.VITE_image_hosted;
   const imageHostingUrl = `https://api.imgbb.com/1/upload?key=${imageToken}`;
+  // https://api.imgbb.com/1/upload?key=YOUR_CLIENT_API_KEY
   const onSubmit = (data) => {
     const formData = new FormData();
     formData.append("image", data.image[0]);

@@ -29,31 +29,16 @@ const AuthProvider = ({ children }) => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
       if (currentUser) {
-        // const currentEmail = {
-        //   email: currentUser.email,
-        // };
         axios
-          .post("http://localhost:5000/jwt", { email: currentUser.email })
+          .post("http://localhost:5000/jwt", { email: currentUser?.email })
           .then((response) => {
             // console.log(response);
             localStorage.setItem("access-token", response.data.token);
+            setLoading(false);
           });
-        // fetch("http://localhost:5000/jwt", {
-        //   method: "POST",
-        //   headers: {
-        //     "content-type": "application/json",
-        //   },
-        //   body: JSON.stringify(currentEmail),
-        // })
-        //   .then((res) => res.json())
-        //   .then((data) => {
-        //     //console.log(data);
-        //     localStorage.setItem("Access-token", data.token);
-        //   });
       } else {
         localStorage.removeItem("access-token");
       }
-      setLoading(false);
     });
     return () => {
       unsubscribe();
@@ -74,3 +59,16 @@ const AuthProvider = ({ children }) => {
 };
 
 export default AuthProvider;
+
+// fetch("http://localhost:5000/jwt", {
+//   method: "POST",
+//   headers: {
+//     "content-type": "application/json",
+//   },
+//   body: JSON.stringify(currentEmail),
+// })
+//   .then((res) => res.json())
+//   .then((data) => {
+//     //console.log(data);
+//     localStorage.setItem("Access-token", data.token);
+//   });

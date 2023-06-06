@@ -4,7 +4,7 @@ import useAxiosSecure from "../../../../hooks/useAxioxSecure";
 import useMenu from "../../../../hooks/useMenu";
 
 const ManageItem = () => {
-  const [menu, refetch, loading] = useMenu();
+  const [menu, refetch] = useMenu();
   const [axiosSecure] = useAxiosSecure();
 
   const handleDelete = (id) => {

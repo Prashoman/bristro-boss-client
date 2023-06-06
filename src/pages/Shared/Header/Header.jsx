@@ -2,16 +2,19 @@ import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthContextProvider } from "../../../AuthProvider/AuthProvider";
 import useCarts from "../../../hooks/useCarts";
+import useAdmin from "../../../hooks/useAdmin";
 
 const Header = () => {
   const { user, logOut } = useContext(AuthContextProvider);
   const [cart] = useCarts();
-
+  const [isAdmin] = useAdmin();
+  console.log(isAdmin);
+  //const testUser = true;
   const handleLogOut = () => {
     logOut()
-      .then((result) => {
-        //console.log(result);
-      })
+      // .then((result) => {
+      //   //console.log(result);
+      // })
       .catch((error) => {
         console.log(error);
       });
@@ -27,6 +30,15 @@ const Header = () => {
       <li>
         <Link to="/shop/salad">Our Shop</Link>
       </li>
+      {user && (
+        <li>
+          {isAdmin ? (
+            <Link to="/dashboard/admin-home">Dashboard</Link>
+          ) : (
+            <Link to="/dashboard/user-home">Dashboard</Link>
+          )}
+        </li>
+      )}
       <li>
         {user ? (
           <>
